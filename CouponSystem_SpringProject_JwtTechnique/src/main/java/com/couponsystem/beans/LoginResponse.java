@@ -1,7 +1,5 @@
 package com.couponsystem.beans;
 
-import com.couponsystem.enums.ClientType;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class LoginResponse {
 	
 	private String token;
-	private ClientType type;
-	
+	private String clientName;
+	private String clientType;
 }
