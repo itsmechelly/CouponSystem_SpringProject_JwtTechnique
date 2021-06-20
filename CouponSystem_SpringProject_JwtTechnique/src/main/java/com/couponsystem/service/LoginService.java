@@ -6,78 +6,107 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.couponsystem.beans.LoginForm;
+import com.couponsystem.beans.LoginResponse;
 import com.couponsystem.exceptions.LogException;
-import com.couponsystem.security.Session;
-import com.couponsystem.security.SessionContext;
+import com.couponsystem.exceptions.NotFoundException;
+import com.couponsystem.security.JwtUtil;
 
 @Service
 @Lazy
 public class LoginService {
-	
+
 	public ApplicationContext ctx;
-	private SessionContext sessionContext;
+	//TODO - the token variable below is only for CLR testing, not for production!
+	public String tokenForClr;
+	private JwtUtil jwtUtil;
 	private AdminService adminService;
 	private CompanyService companyService;
 	private CustomerService customerService;
-	
+
 	@Autowired
-	public LoginService(SessionContext sessionContext, AdminService adminService, CompanyService companyService,
+	public LoginService(ApplicationContext ctx, String tokenForClr, JwtUtil jwtUtil, AdminService adminService, CompanyService companyService,
 			CustomerService customerService) {
 		super();
-		this.sessionContext = sessionContext;
+		this.ctx = ctx;
+		this.tokenForClr = tokenForClr;
+		this.jwtUtil = jwtUtil;
 		this.adminService = adminService;
 		this.companyService = companyService;
 		this.customerService = customerService;
 	}
-	
-	public String login(LoginForm loginForm) throws LogException {		
-		
+
+	public String getTokenForClr() {
+		return tokenForClr;
+	}
+
+	public LoginResponse login(LoginForm loginForm) throws LogException, NotFoundException {
+
 		switch (loginForm.getClientType()) {
-		
+
 		case ADMIN:
-//			adminService = ctx.getBean(AdminService.class);
-//			AdminService adminService = ctx.getBean(AdminService.class);
+
 			if (adminService.login(loginForm.getEmail(), loginForm.getPassword())) {
+
+				String jwtToken = jwtUtil.generateToken(loginForm.getClientType().toString(), 0, "Admin", "admin@admin.com");
+
+				LoginResponse loginResponse = new LoginResponse();
+				loginResponse.setClientType(loginForm.getClientType().toString());
+				loginResponse.setClientName("Admin");
+				loginResponse.setToken(jwtToken);
 				
-				Session session = sessionContext.createSession();
-				session.setAttribute("ClientType", loginForm.getClientType());
-				session.setAttribute("ADMIN", adminService);
-				return session.token;
+				//TODO - the token variable below is only for CLR testing, not for production!
+				tokenForClr = jwtToken;
+				
+				return loginResponse;
 			}
-			
+
 		case COMPANY:
 			
-//			companyService = ctx.getBean(CompanyService.class);
-//			CompanyService companyService = ctx.getBean(CompanyService.class);
+			companyService = ctx.getBean(CompanyService.class);
 			if (companyService.login(loginForm.getEmail(), loginForm.getPassword())) {
-				
+
 				int companyId = companyService.findCompanyIdByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
-				companyService.setCompanyId(companyId);
+				String clientName = companyService.findCompanyNameByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
+
+				String jwtToken = jwtUtil.generateToken(loginForm.getClientType().toString(),
+						companyId, clientName, loginForm.getEmail());
+
+				LoginResponse loginResponse = new LoginResponse();
+				loginResponse.setClientType(loginForm.getClientType().toString());
+				loginResponse.setClientName(clientName);
+				loginResponse.setToken(jwtToken);
 				
-				Session session = sessionContext.createSession();
-				session.setAttribute("ClientType", loginForm.getClientType());
-				session.setAttribute("COMPANY", companyService);
-				return session.token;
+				//TODO - the token variable below is only for CLR testing, not for production!
+				tokenForClr = jwtToken;
+				
+				return loginResponse;
 			}
-			
+
 		case CUSTOMER:
-			
-//			customerService = ctx.getBean(CustomerService.class);
-//			CustomerService customerService = ctx.getBean(CustomerService.class);
+
+			customerService = ctx.getBean(CustomerService.class);
 			if (customerService.login(loginForm.getEmail(), loginForm.getPassword())) {
-				
+
 				int customerId = customerService.findCustomerIdByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
-				customerService.setCustomerId(customerId);
+				String clientName = customerService.findCustomerFirstNameByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
+
+				String jwtToken = jwtUtil.generateToken(loginForm.getClientType().toString(),
+						customerId, clientName, loginForm.getEmail());
+
+				LoginResponse loginResponse = new LoginResponse();
+				loginResponse.setClientType(loginForm.getClientType().toString());
+				loginResponse.setClientName(clientName);
+				loginResponse.setToken(jwtToken);
 				
-				Session session = sessionContext.createSession();
-				session.setAttribute("ClientType", loginForm.getClientType());
-				session.setAttribute("CUSTOMER", customerService);
-				return session.token;
+				//TODO - the token variable below is only for CLR testing, not for production!
+				tokenForClr = jwtToken;
+				
+				return loginResponse;
 			}
-			
+
 		default:
 			throw new LogException();
 		}
 	}
-	
+
 }

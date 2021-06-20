@@ -45,6 +45,11 @@ public class CompanyService extends ClientService {
 		return cForCompanyId.getId();
 	}
 
+	public String findCompanyNameByEmailAndPassword(String email, String password) {
+		Company cForCompanyId = companyImpl.findCompanyByEmailAndPassword(email, password);
+		return cForCompanyId.getName();
+	}
+	
 //	------------------------------------------------------------------------------------------------------------
 
 	public Coupon addCoupon(Coupon coupon) throws AlreadyExistException, LogException {

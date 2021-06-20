@@ -44,6 +44,12 @@ public class CustomerService extends ClientService{
 		Customer cForCustomerId = customerImpl.findCustomerByEmailAndPassword(email, password);
 		return cForCustomerId.getId();
 	}
+	
+	public String findCustomerFirstNameByEmailAndPassword(String email, String password) {
+		Customer cForCustomerId = customerImpl.findCustomerByEmailAndPassword(email, password);
+		return cForCustomerId.getFirstName();
+	}
+	
 //	------------------------------------------------------------------------------------------------------------
 	
 	public Coupon purchaseCoupon(Coupon coupon) throws PurchaseCouponException, LogException, NotFoundException {
