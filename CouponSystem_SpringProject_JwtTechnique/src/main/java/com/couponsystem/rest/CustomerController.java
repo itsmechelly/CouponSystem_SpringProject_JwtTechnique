@@ -20,20 +20,22 @@ import com.couponsystem.exceptions.LogException;
 import com.couponsystem.exceptions.NotFoundException;
 import com.couponsystem.exceptions.PurchaseCouponException;
 import com.couponsystem.service.CustomerService;
-import com.couponsystem.security.SessionContext;
+import com.couponsystem.security.JwtUtil;
 
 @RestController
 @RequestMapping("/customer")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CustomerController {
-	
-	private SessionContext sessionContext;
+
+	private final CustomerService customerService;
+	private final JwtUtil jwtUtil;
 
 	@Autowired
-	public CustomerController(SessionContext sessionContext) {
+	public CustomerController(CustomerService customerService, JwtUtil jwtUtil) {
 		super();
-		this.sessionContext = sessionContext;
+		this.customerService = customerService;
+		this.jwtUtil = jwtUtil;
 	}
 
 //	------------------------------------------------------------------------------------------------------------
@@ -43,8 +45,9 @@ public class CustomerController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CustomerService) sessionContext.getClientService(token, ClientType.CUSTOMER.toString())).purchaseCoupon(coupon));
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.purchaseCoupon(coupon));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (PurchaseCouponException e) {
@@ -58,8 +61,9 @@ public class CustomerController {
 	public ResponseEntity<?> getAllCustomerCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CustomerService) sessionContext.getClientService(token, ClientType.CUSTOMER.toString())).getAllCoupons());
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.getAllCoupons());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -72,9 +76,9 @@ public class CustomerController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(
-					((CustomerService) sessionContext.getClientService(token, ClientType.CUSTOMER.toString())).getAllCouponsByCategory(couponCategory));
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.getAllCouponsByCategory(couponCategory));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -87,22 +91,23 @@ public class CustomerController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((CustomerService) sessionContext.getClientService(token, ClientType.CUSTOMER.toString())).getAllCouponsUnderMaxPrice(maxPrice));
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.getAllCouponsUnderMaxPrice(maxPrice));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/getCustomerDetails")
 	public ResponseEntity<?> getCustomerDetails(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CustomerService) sessionContext.getClientService(token, ClientType.CUSTOMER.toString())).getCustomerDetails());
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.getCustomerDetails());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {

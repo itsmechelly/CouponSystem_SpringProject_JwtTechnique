@@ -23,7 +23,7 @@ import com.couponsystem.exceptions.LogException;
 import com.couponsystem.exceptions.NotAllowedException;
 import com.couponsystem.exceptions.NotFoundException;
 import com.couponsystem.service.CompanyService;
-import com.couponsystem.security.SessionContext;
+import com.couponsystem.security.JwtUtil;
 
 @RestController
 @RequestMapping("/company")
@@ -31,14 +31,16 @@ import com.couponsystem.security.SessionContext;
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CompanyController {
 
-	private final SessionContext sessionContext;
+	private final CompanyService companyService;
+	private final JwtUtil jwtUtil;
 
 	@Autowired
-	public CompanyController(SessionContext sessionContext) {
+	public CompanyController(CompanyService companyService, JwtUtil jwtUtil) {
 		super();
-		this.sessionContext = sessionContext;
+		this.companyService = companyService;
+		this.jwtUtil = jwtUtil;
 	}
-	
+
 //	------------------------------------------------------------------------------------------------------------
 
 	@PostMapping("/addCompanyCoupon")
@@ -46,14 +48,13 @@ public class CompanyController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).addCoupon(coupon));
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.addCoupon(coupon));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (AlreadyExistException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		} catch (NotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -62,9 +63,9 @@ public class CompanyController {
 			@RequestHeader(name = "CouponSystem_Header") String token) throws AlreadyExistException {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).updateCoupon(coupon));
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.updateCoupon(coupon));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -79,9 +80,9 @@ public class CompanyController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).deleteCoupon(couponId));
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.deleteCoupon(couponId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -93,8 +94,9 @@ public class CompanyController {
 	public ResponseEntity<?> getAllCompaniesCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).getAllCoupons());
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.getAllCoupons());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -107,9 +109,9 @@ public class CompanyController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(
-					((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).getAllCouponsByCategory(couponCategory));
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.getAllCouponsByCategory(couponCategory));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -122,9 +124,9 @@ public class CompanyController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).getAllCouponsUnderMaxPrice(maxPrice));
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.getAllCouponsUnderMaxPrice(maxPrice));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -136,8 +138,9 @@ public class CompanyController {
 	public ResponseEntity<?> getCompanyDetails(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((CompanyService) sessionContext.getClientService(token, ClientType.COMPANY.toString())).getCompanyDetails());
+			jwtUtil.validateService(token, ClientType.COMPANY.toString());
+			companyService.setCompanyId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(companyService.getCompanyDetails());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {

@@ -23,20 +23,22 @@ import com.couponsystem.exceptions.LogException;
 import com.couponsystem.exceptions.NotAllowedException;
 import com.couponsystem.exceptions.NotFoundException;
 import com.couponsystem.service.AdminService;
-import com.couponsystem.security.SessionContext;
+import com.couponsystem.security.JwtUtil;
 
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class AdminController {
-	
-	private final SessionContext sessionContext;
-	
+
+	private final AdminService adminService;
+	private final JwtUtil jwtUtil;
+
 	@Autowired
-	public AdminController(SessionContext sessionContext) {
+	public AdminController(AdminService adminService, JwtUtil jwtUtil) {
 		super();
-		this.sessionContext = sessionContext;
+		this.adminService = adminService;
+		this.jwtUtil = jwtUtil;
 	}
 
 //	------------------------------------------------------------------------------------------------------------
@@ -46,14 +48,12 @@ public class AdminController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(( (AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).addCompany(company));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.addCompany(company));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (AlreadyExistException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		} catch (NotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -62,8 +62,8 @@ public class AdminController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).updateCompany(company));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.updateCompany(company));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -78,8 +78,8 @@ public class AdminController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).deleteCompany(companyId));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.deleteCompany(companyId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -92,9 +92,8 @@ public class AdminController {
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).getOneCompanyById(companyId));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.getOneCompanyById(companyId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -106,8 +105,8 @@ public class AdminController {
 	public ResponseEntity<?> getAllCompanies(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).getAllCompanies());
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.getAllCompanies());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -116,29 +115,26 @@ public class AdminController {
 	}
 
 	@PostMapping("/addCustomer")
-	public ResponseEntity<?> addCustomer(@RequestBody Customer customer, @RequestHeader(name = "CouponSystem_Header") String token) {
+	public ResponseEntity<?> addCustomer(@RequestBody Customer customer,
+			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).addCustomer(customer));	
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.addCustomer(customer));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (AlreadyExistException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		} catch (NotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PutMapping("/updateCustomer")
-	public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @RequestHeader(name = "CouponSystem_Header") String token) {
+	public ResponseEntity<?> updateCustomer(@RequestBody Customer customer,
+			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).updateCustomer(customer));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.updateCustomer(customer));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -147,12 +143,12 @@ public class AdminController {
 	}
 
 	@DeleteMapping("/deleteCustomer/{customerId}")
-	public ResponseEntity<?> deleteCustomer(@PathVariable int customerId, @RequestHeader(name = "CouponSystem_Header") String token) {
+	public ResponseEntity<?> deleteCustomer(@PathVariable int customerId,
+			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).deleteCustomer(customerId));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.deleteCustomer(customerId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -161,12 +157,12 @@ public class AdminController {
 	}
 
 	@GetMapping("/getOneCustomerById/{customerId}")
-	public ResponseEntity<?> getOneCustomerById(@PathVariable int customerId, @RequestHeader(name = "CouponSystem_Header") String token) {
+	public ResponseEntity<?> getOneCustomerById(@PathVariable int customerId,
+			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).getOneCustomerById(customerId));
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.getOneCustomerById(customerId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
@@ -175,11 +171,11 @@ public class AdminController {
 	}
 
 	@GetMapping("/getAllCustomers")
-	public ResponseEntity<?> getAllCustomers(@RequestHeader(name = "CouponSystem_Header") String token) throws CouponSystemException {
+	public ResponseEntity<?> getAllCustomers(@RequestHeader(name = "CouponSystem_Header") String token)
+			throws CouponSystemException {
 		try {
-			sessionContext.isTokenExist(token);
-			return ResponseEntity
-					.ok(((AdminService) sessionContext.getClientService(token, ClientType.ADMIN.toString())).getAllCustomers());
+			jwtUtil.validateService(token, ClientType.ADMIN.toString());
+			return ResponseEntity.ok(adminService.getAllCustomers());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
