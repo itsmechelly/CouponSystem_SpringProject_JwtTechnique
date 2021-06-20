@@ -11,22 +11,25 @@ import com.couponsystem.beans.LoginForm;
 import com.couponsystem.enums.ClientType;
 import com.couponsystem.rest.AdminController;
 import com.couponsystem.security.LoginController;
+import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 
 @Component
 @Order(1)
 public class AdminClr implements CommandLineRunner {
 
-	private final LoginController loginController;
-	private final AdminController adminController;
-
+	private LoginController loginController;
+	private LoginService loginService;
+	private AdminController adminController;
+	
 	@Autowired
-	public AdminClr(LoginController loginController, AdminController adminController) {
+	public AdminClr(LoginController loginController, LoginService loginService, AdminController adminController) {
 		super();
 		this.loginController = loginController;
+		this.loginService = loginService;
 		this.adminController = adminController;
 	}
-
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -60,7 +63,7 @@ public class AdminClr implements CommandLineRunner {
 		System.out.println("Going to test GOOD admin login:");
 		LoginForm goodLoginForm = new LoginForm("admin@admin.com", "admin", ClientType.ADMIN);
 		System.out.println(loginController.login(goodLoginForm));
-		String token = loginController.getToken();
+		String token = loginService.getTokenForClr();
 		
 		
 //		TODO -> Logout

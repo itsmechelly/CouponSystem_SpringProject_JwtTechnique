@@ -11,6 +11,7 @@ import com.couponsystem.enums.ClientType;
 import com.couponsystem.enums.CouponCategory;
 import com.couponsystem.rest.CompanyController;
 import com.couponsystem.security.LoginController;
+import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 import com.couponsystem.utils.DateUtil;
 
@@ -19,12 +20,14 @@ import com.couponsystem.utils.DateUtil;
 public class CompanyClr implements CommandLineRunner {
 
 	private final LoginController loginController;
+	private LoginService loginService;
 	private final CompanyController companyController;
 
 	@Autowired
-	public CompanyClr(LoginController loginController, CompanyController companyController) {
+	public CompanyClr(LoginController loginController, LoginService loginService, CompanyController companyController) {
 		super();
 		this.loginController = loginController;
+		this.loginService = loginService;
 		this.companyController = companyController;
 	}
 
@@ -62,7 +65,7 @@ public class CompanyClr implements CommandLineRunner {
 		System.out.println("Going to test GOOD company login:");
 		LoginForm goodLoginForm = new LoginForm("comp1Email@comp.com", "1111", ClientType.COMPANY);
 		System.out.println(loginController.login(goodLoginForm));
-		String token = loginController.getToken();
+		String token = loginService.getTokenForClr();
 		
 //		TODO -> Logout
 //		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Company Logout:");

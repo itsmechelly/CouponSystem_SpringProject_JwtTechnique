@@ -11,6 +11,7 @@ import com.couponsystem.enums.CouponCategory;
 import com.couponsystem.impl.CustomerImpl;
 import com.couponsystem.rest.CustomerController;
 import com.couponsystem.security.LoginController;
+import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 
 @Component
@@ -19,13 +20,15 @@ public class CustomerClr implements CommandLineRunner {
 
 	
 	private final CustomerController customerController;
+	private LoginService loginService;
 	private final CustomerImpl customerImpl;
 	private final LoginController loginController;
 
 	@Autowired
-	public CustomerClr(LoginController loginController, CustomerController customerController, CustomerImpl customerImpl) {
+	public CustomerClr(LoginController loginController, LoginService loginService, CustomerController customerController, CustomerImpl customerImpl) {
 		super();
 		this.loginController = loginController;
+		this.loginService = loginService;
 		this.customerController = customerController;
 		this.customerImpl = customerImpl;
 	}
@@ -63,7 +66,7 @@ public class CustomerClr implements CommandLineRunner {
 		System.out.println("Going to test GOOD customer login:");
 		LoginForm goodLoginForm = new LoginForm("cust1@cust.com", "1111", ClientType.CUSTOMER);
 		System.out.println(loginController.login(goodLoginForm));
-		String token = loginController.getToken();
+		String token = loginService.getTokenForClr();
 
 //		TODO -> Logout
 //		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Customer Logout:");
