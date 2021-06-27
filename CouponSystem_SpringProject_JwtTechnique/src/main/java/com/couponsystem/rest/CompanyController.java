@@ -75,8 +75,8 @@ public class CompanyController {
 		}
 	}
 
-	@DeleteMapping("/deleteCompanyCoupon")
-	public ResponseEntity<?> deleteCompanyCoupon(@RequestParam int couponId,
+	@DeleteMapping("/deleteCompanyCoupon/{couponId}")
+	public ResponseEntity<?> deleteCompanyCoupon(@PathVariable int couponId,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {

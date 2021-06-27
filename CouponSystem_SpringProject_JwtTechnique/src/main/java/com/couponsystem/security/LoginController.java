@@ -34,6 +34,7 @@ public class LoginController {
 			LoginResponse loginResponse = loginService.login(loginForm);
 			responseHeaders.set("CouponSystem_Header", loginResponse.getToken());
 			return ResponseEntity.ok().headers(responseHeaders).body(loginResponse);
+//			return ResponseEntity.ok().body(loginResponse);
 
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);

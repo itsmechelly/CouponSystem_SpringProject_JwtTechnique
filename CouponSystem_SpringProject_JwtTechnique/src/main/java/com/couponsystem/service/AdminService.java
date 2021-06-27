@@ -53,7 +53,7 @@ public class AdminService extends ClientService {
 
 		if (compFromDb == null)
 			throw new NotFoundException("company details.");
-		if (!company.getName().equalsIgnoreCase(compFromDb.getName()))
+		if (!company.getName().equalsIgnoreCase(compFromDb.getName()) && company.getId() != compFromDb.getId())
 			throw new NotAllowedException("company name to", company.getName());
 
 		return adminImpl.updateCompany(company);
