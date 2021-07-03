@@ -86,8 +86,8 @@ public class CustomerController {
 		}
 	}
 
-	@GetMapping("/getAllCouponsUnderMaxPrice")
-	public ResponseEntity<?> getAllCouponsUnderMaxPrice(@RequestParam double maxPrice,
+	@GetMapping("/getAllCouponsUnderMaxPrice/{maxPrice}")
+	public ResponseEntity<?> getAllCouponsUnderMaxPrice(@PathVariable double maxPrice,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {

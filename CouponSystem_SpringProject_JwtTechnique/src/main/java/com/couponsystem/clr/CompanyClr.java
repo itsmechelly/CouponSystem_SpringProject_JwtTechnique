@@ -78,7 +78,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup1 = new Coupon();
 		coup1.setCategory(CouponCategory.FOOD);
 		coup1.setTitle("coup1Title");
-		coup1.setDescription("coup1Description");
+		coup1.setDescription("This is coupon description bla bla bla");
 		coup1.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup1.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup1.setAmount(0);
@@ -88,7 +88,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup2 = new Coupon();
 		coup2.setCategory(CouponCategory.FOOD);
 		coup2.setTitle("coup2Title");
-		coup2.setDescription("coup2Description");
+		coup2.setDescription("This is coupon description bla bla bla");
 		coup2.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup2.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup2.setAmount(200);
@@ -98,7 +98,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup3 = new Coupon();
 		coup3.setCategory(CouponCategory.RESTAURANT);
 		coup3.setTitle("coup3Title");
-		coup3.setDescription("coup3DDDDDDDDDDD");
+		coup3.setDescription("This is coupon description bla bla bla");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup3.setAmount(888);
@@ -108,7 +108,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup4 = new Coupon();
 		coup4.setCategory(CouponCategory.RESTAURANT);
 		coup4.setTitle("coup4Title");
-		coup4.setDescription("coup4Description");
+		coup4.setDescription("This is coupon description bla bla bla");
 		coup4.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup4.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup4.setAmount(400);
@@ -118,7 +118,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup5 = new Coupon();
 		coup5.setCategory(CouponCategory.RESTAURANT);
 		coup5.setTitle("coup5Title");
-		coup5.setDescription("coup5Description");
+		coup5.setDescription("This is coupon description bla bla bla");
 		coup5.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup5.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup5.setAmount(500);
@@ -128,7 +128,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup6 = new Coupon();
 		coup6.setCategory(CouponCategory.VACATION);
 		coup6.setTitle("coup6Title");
-		coup6.setDescription("coup6Description");
+		coup6.setDescription("This is coupon description bla bla bla");
 		coup6.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup6.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup6.setAmount(600);
@@ -138,7 +138,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup7 = new Coupon();
 		coup7.setCategory(CouponCategory.VACATION);
 		coup7.setTitle("coup7Title");
-		coup7.setDescription("coup7Description");
+		coup7.setDescription("This is coupon description bla bla bla");
 		coup7.setStartDate(DateUtil.dateFormat(2019, 07, 28));
 		coup7.setEndDate(DateUtil.dateFormat(2019, 8, 28));
 		coup7.setAmount(700);
@@ -148,7 +148,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup8 = new Coupon();
 		coup8.setCategory(CouponCategory.RESTAURANT);
 		coup8.setTitle("coup8Title");
-		coup8.setDescription("coup8Description");
+		coup8.setDescription("This is coupon description bla bla bla");
 		coup8.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup8.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup8.setAmount(800);
@@ -170,7 +170,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup77 = new Coupon();
 		coup77.setCategory(CouponCategory.VACATION);
 		coup77.setTitle("coup7Title");
-		coup77.setDescription("coup77Description");
+		coup77.setDescription("This is coupon description bla bla bla");
 		coup77.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup77.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup77.setAmount(7700);
@@ -182,7 +182,7 @@ public class CompanyClr implements CommandLineRunner {
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.updateCoupon:");
 
 		coup3.setTitle("coup3Title");
-		coup3.setDescription("coup3Description");
+		coup3.setDescription("This is coupon description bla bla bla");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 29));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 29));
 		coup3.setAmount(333);
