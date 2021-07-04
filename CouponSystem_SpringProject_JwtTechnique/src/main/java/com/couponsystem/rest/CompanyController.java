@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.couponsystem.beans.Coupon;
@@ -120,7 +119,7 @@ public class CompanyController {
 	}
 
 	@GetMapping("/getAllCouponsUnderMaxPrice/{maxPrice}")
-	public ResponseEntity<?> getAllCouponsUnderMaxPrice(@RequestParam double maxPrice,
+	public ResponseEntity<?> getAllCouponsUnderMaxPrice(@PathVariable double maxPrice,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
