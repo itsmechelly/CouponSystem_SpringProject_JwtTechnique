@@ -75,24 +75,24 @@ public class CustomerClr implements CommandLineRunner {
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test customerController.purchaseCoupon:");
 
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(2), token));
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(4), token));
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(6), token));
+		System.out.println(customerController.purchaseCoupon(2, token));
+		System.out.println(customerController.purchaseCoupon(4, token));
+		System.out.println(customerController.purchaseCoupon(6, token));
 
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test *BAD REQUEST* for customerController.purchaseCoupon: (customer can't purchase the same coupon more then once)");
 
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(2), token));
+		System.out.println(customerController.purchaseCoupon(2, token));
 
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test *BAD REQUEST* for customerController.purchaseCoupon: (customer can't purchase the coupon if amount<0)");
 
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(1), token));
+		System.out.println(customerController.purchaseCoupon(1, token));
 
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test *BAD REQUEST* for customerController.purchaseCoupon: (customer can't purchase the coupon if the coupon has expired)");
 
-		System.out.println(customerController.purchaseCoupon(customerImpl.findCouponById(7), token));
+		System.out.println(customerController.purchaseCoupon(7, token));
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test customerController.getAllCustomerCoupons:");
 

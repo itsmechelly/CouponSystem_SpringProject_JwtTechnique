@@ -45,6 +45,10 @@ public class CustomerImpl {
 		return couponRepository.findById(id);
 	}
 	
+	public List<Coupon> getAllCoupons() {
+		return couponRepository.findAll();
+	}
+	
 	public List<Coupon> getCouponsByCustomersId(int id) {
 		return couponRepository.getCouponsByCustomersId(id);
 	}

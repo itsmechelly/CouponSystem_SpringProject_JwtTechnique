@@ -52,20 +52,21 @@ public class CustomerService extends ClientService{
 	
 //	------------------------------------------------------------------------------------------------------------
 	
-	public Coupon purchaseCoupon(Coupon coupon) throws PurchaseCouponException, LogException, NotFoundException {
+	public Coupon purchaseCoupon(int couponId) throws PurchaseCouponException, LogException, NotFoundException {
 
-		Coupon coupFromDb = customerImpl.findCouponById(coupon.getId());
+		Coupon coupFromDb = customerImpl.findCouponById(couponId);
 		Customer custFromDb = customerImpl.findCustomerById(this.customerId);
 		List<Coupon> coupListFromDb = customerImpl.getCouponsByCustomersId(this.customerId);
-		
-		if (customerImpl.couponExistsByCustomersIdAndTitle(this.customerId, coupon.getTitle())) 
+
+
+		if (customerImpl.couponExistsByCustomersIdAndTitle(this.customerId, coupFromDb.getTitle())) 
 			throw new PurchaseCouponException("Purchasing this type of coupon is limited to one use only. you are welcome to choose another coupon.");
 		if (coupFromDb.getAmount() < 1)
 			throw new PurchaseCouponException("Coupon out of stock, you are welcome to choose another coupon.");
 		if (coupFromDb.getEndDate().before(java.sql.Date.valueOf(LocalDate.now())))
 			throw new PurchaseCouponException("This coupon has expired, you are welcome to choose another coupon.");
 		
-		coupFromDb.setAmount(coupon.getAmount() - 1);
+		coupFromDb.setAmount(coupFromDb.getAmount() - 1);
 		coupListFromDb.add(coupFromDb);
 		custFromDb.setCoupons(coupListFromDb);
 		customerImpl.updateCustomer(custFromDb);
@@ -74,6 +75,16 @@ public class CustomerService extends ClientService{
 	}
 	
 	public List<Coupon> getAllCoupons() throws NotFoundException, LogException {
+		
+		List<Coupon> couponsFromDb = customerImpl.getAllCoupons();
+		
+		if (couponsFromDb.isEmpty())
+			throw new NotFoundException("coupons details.");
+		
+		return couponsFromDb;
+	}
+	
+	public List<Coupon> getAllCouponsByCustomerId() throws NotFoundException, LogException {
 
 		List<Coupon> customerFromDb = customerImpl.getCouponsByCustomersId(this.customerId);
 

@@ -7,13 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.couponsystem.beans.Coupon;
 import com.couponsystem.enums.ClientType;
 import com.couponsystem.enums.CouponCategory;
 import com.couponsystem.exceptions.LogException;
@@ -40,14 +37,14 @@ public class CustomerController {
 
 //	------------------------------------------------------------------------------------------------------------
 
-	@PostMapping("/purchaseCoupon")
-	public ResponseEntity<?> purchaseCoupon(@RequestBody Coupon coupon,
+	@PostMapping("/purchaseCoupon/{couponId}")
+	public ResponseEntity<?> purchaseCoupon(@PathVariable int couponId,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
 			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
 			customerService.setCustomerId(jwtUtil.extractId(token));
-			return ResponseEntity.ok(customerService.purchaseCoupon(coupon));
+			return ResponseEntity.ok(customerService.purchaseCoupon(couponId));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (PurchaseCouponException e) {
@@ -57,13 +54,27 @@ public class CustomerController {
 		}
 	}
 
+	@GetMapping("/getAllCoupons")
+	public ResponseEntity<?> getAllCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
+
+		try {
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			customerService.setCustomerId(jwtUtil.extractId(token));
+			return ResponseEntity.ok(customerService.getAllCoupons());
+		} catch (LogException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+		} catch (NotFoundException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@GetMapping("/getAllCustomerCoupons")
 	public ResponseEntity<?> getAllCustomerCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
 			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
 			customerService.setCustomerId(jwtUtil.extractId(token));
-			return ResponseEntity.ok(customerService.getAllCoupons());
+			return ResponseEntity.ok(customerService.getAllCouponsByCustomerId());
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
