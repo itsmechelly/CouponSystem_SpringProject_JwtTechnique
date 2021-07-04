@@ -119,7 +119,7 @@ public class CompanyController {
 		}
 	}
 
-	@GetMapping("/getAllCouponsUnderMaxPrice")
+	@GetMapping("/getAllCouponsUnderMaxPrice/{maxPrice}")
 	public ResponseEntity<?> getAllCouponsUnderMaxPrice(@RequestParam double maxPrice,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
