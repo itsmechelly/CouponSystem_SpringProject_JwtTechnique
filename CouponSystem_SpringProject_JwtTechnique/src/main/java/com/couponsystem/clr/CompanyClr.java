@@ -139,8 +139,10 @@ public class CompanyClr implements CommandLineRunner {
 		coup7.setCategory(CouponCategory.VACATION);
 		coup7.setTitle("coup7Title");
 		coup7.setDescription("This is coupon description bla bla bla");
-		coup7.setStartDate(DateUtil.dateFormat(2019, 07, 28));
-		coup7.setEndDate(DateUtil.dateFormat(2019, 8, 28));
+//		coup7.setStartDate(DateUtil.dateFormat(2019, 07, 28));
+//		coup7.setEndDate(DateUtil.dateFormat(2019, 8, 28));
+		coup7.setStartDate(DateUtil.dateFormat(2029, 07, 28));
+		coup7.setEndDate(DateUtil.dateFormat(2029, 8, 28));
 		coup7.setAmount(700);
 		coup7.setPrice(700);
 		coup7.setImage("www.compPng7.com");
