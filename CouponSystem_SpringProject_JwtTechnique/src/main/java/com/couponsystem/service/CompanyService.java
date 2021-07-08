@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.couponsystem.beans.Company;
 import com.couponsystem.beans.Coupon;
@@ -24,10 +25,12 @@ public class CompanyService extends ClientService {
 
 	public int companyId;
 	private CompanyImpl companyImpl;
+	private FileStorageService storageService;
 
-	public CompanyService(CompanyImpl companyImpl) {
+	public CompanyService(CompanyImpl companyImpl, FileStorageService storageService) {
 		super();
 		this.companyImpl = companyImpl;
+		this.storageService = storageService;
 	}
 
 //	------------------------------------------------------------------------------------------------------------
@@ -49,23 +52,27 @@ public class CompanyService extends ClientService {
 		Company cForCompanyId = companyImpl.findCompanyByEmailAndPassword(email, password);
 		return cForCompanyId.getName();
 	}
-	
+
 //	------------------------------------------------------------------------------------------------------------
 
-	public Coupon addCoupon(Coupon coupon) throws AlreadyExistException, LogException {
+	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
 
 		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
-		
+
+		String imagePath = this.storageService.storeFile(imageFile);
+		coupon.setImage(imagePath);
+
 		coupon.setCompanyId(this.companyId);
 		companyImpl.addCoupon(coupon);
 		return coupon;
 	}
 
-	public Coupon updateCoupon(Coupon coupon)
+	public Coupon updateCoupon(Coupon coupon, MultipartFile imageFile)
 			throws LogException, NotFoundException, NotAllowedException, AlreadyExistException {
 
-		Optional<Coupon> coupFromDb1 = Optional.of(companyImpl.findCouponByCompanyIdAndTitle(this.companyId, coupon.getTitle()));
+		Optional<Coupon> coupFromDb1 = Optional
+				.of(companyImpl.findCouponByCompanyIdAndTitle(this.companyId, coupon.getTitle()));
 		Optional<Coupon> coupFromDb2 = Optional.of(companyImpl.findCouponById(coupon.getId()));
 
 		if (coupon.getId() != coupFromDb1.get().getId())
@@ -74,7 +81,12 @@ public class CompanyService extends ClientService {
 			throw new NotAllowedException("company id number", this.companyId);
 		if (companyImpl.couponExistsByTitleAndIdNot(coupon.getTitle(), coupon.getId()))
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
-		
+		if (imageFile != null) {
+			this.storageService.deleteFile(coupon.getImage());
+			String imagePath = this.storageService.storeFile(imageFile);
+			coupon.setImage(imagePath);
+		}
+
 		companyImpl.updateCoupon(coupon);
 		return coupon;
 	}
@@ -83,7 +95,7 @@ public class CompanyService extends ClientService {
 
 		if (!companyImpl.couponExistsById(id))
 			throw new NotFoundException("coupons details.");
-		
+
 		companyImpl.deleteCoupon(id);
 		return "Coupon with id number " + id + " deleted successfully.";
 	}
@@ -94,7 +106,7 @@ public class CompanyService extends ClientService {
 
 		if (coupFromDb.isEmpty())
 			throw new NotFoundException("coupons details.");
-		
+
 		return coupFromDb;
 	}
 
@@ -104,7 +116,7 @@ public class CompanyService extends ClientService {
 
 		if (coupFromDb.isEmpty())
 			throw new NotFoundException("coupons from category type " + category + ".");
-		
+
 		return coupFromDb;
 	}
 
@@ -114,7 +126,7 @@ public class CompanyService extends ClientService {
 
 		if (coupFromDb.isEmpty())
 			throw new NotFoundException("coupons under price ", maxPrice);
-		
+
 		return coupFromDb;
 	}
 
@@ -124,7 +136,7 @@ public class CompanyService extends ClientService {
 
 		if (companyFromDb.isEmpty())
 			throw new NotFoundException("company details.");
-		
+
 		return companyImpl.findCompanyById(this.companyId);
 	}
 

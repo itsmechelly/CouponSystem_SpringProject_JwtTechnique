@@ -6,13 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.couponsystem.beans.Coupon;
 import com.couponsystem.enums.ClientType;
@@ -43,13 +46,13 @@ public class CompanyController {
 //	------------------------------------------------------------------------------------------------------------
 
 	@PostMapping("/addCompanyCoupon")
-	public ResponseEntity<?> addCompanyCoupon(@RequestBody Coupon coupon,
+	public ResponseEntity<?> addCompanyCoupon(@ModelAttribute Coupon coupon, @RequestParam MultipartFile imageFile,
 			@RequestHeader(name = "CouponSystem_Header") String token) {
 
 		try {
 			jwtUtil.validateService(token, ClientType.COMPANY.toString());
 			companyService.setCompanyId(jwtUtil.extractId(token));
-			return ResponseEntity.ok(companyService.addCoupon(coupon));
+			return ResponseEntity.ok(companyService.addCoupon(coupon, imageFile));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (AlreadyExistException e) {
@@ -58,13 +61,14 @@ public class CompanyController {
 	}
 
 	@PutMapping("/updateCompanyCoupon")
-	public ResponseEntity<?> updateCompanyCoupon(@RequestBody Coupon coupon,
+	public ResponseEntity<?> updateCompanyCoupon(@ModelAttribute Coupon coupon,
+			@RequestParam(required = false) MultipartFile imageFile,
 			@RequestHeader(name = "CouponSystem_Header") String token) throws AlreadyExistException {
 
 		try {
 			jwtUtil.validateService(token, ClientType.COMPANY.toString());
 			companyService.setCompanyId(jwtUtil.extractId(token));
-			return ResponseEntity.ok(companyService.updateCoupon(coupon));
+			return ResponseEntity.ok(companyService.updateCoupon(coupon, imageFile));
 		} catch (LogException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		} catch (NotFoundException e) {
