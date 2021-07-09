@@ -74,14 +74,14 @@ public class AdminClr implements CommandLineRunner {
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test adminController.addCompany:");
 
 		Company comp1 = new Company();
-		comp1.setName("compName1");
-		comp1.setEmail("comp1Email@comp.com");
-		comp1.setPassword("1111");
+		comp1.setName("Zoot Allures");
+		comp1.setEmail("zootAllures@company.com");
+		comp1.setPassword("zootAllures");
 
 		Company comp2 = new Company();
-		comp2.setName("compName2");
-		comp2.setEmail("comp2Email@comp.com");
-		comp2.setPassword("2222");
+		comp2.setName("KSP");
+		comp2.setEmail("KSP@company.com");
+		comp2.setPassword("KSPP");
 
 		Company comp3 = new Company();
 		comp3.setName("compName3");

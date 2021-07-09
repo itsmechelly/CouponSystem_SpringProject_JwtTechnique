@@ -14,7 +14,7 @@ import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 
 @Component
-@Order(3)
+@Order(6)
 public class CustomerClr implements CommandLineRunner {
 
 	

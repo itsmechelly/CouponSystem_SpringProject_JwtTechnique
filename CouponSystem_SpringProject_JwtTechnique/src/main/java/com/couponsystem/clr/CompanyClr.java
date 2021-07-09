@@ -57,19 +57,19 @@ public class CompanyClr implements CommandLineRunner {
 //		------------------------------------------------------------------------------------------------------------
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Testing Company Login:");
-//
+
 		System.out.println("Going to test login exception - *WRONG* *Email*:");
-		LoginForm badEmailLoginForm = new LoginForm("BADcomp@comp.com", "1111", ClientType.COMPANY);
+		LoginForm badEmailLoginForm = new LoginForm("zootAlluress@company.com", "zootAllures", ClientType.COMPANY);
 		System.out.println(loginController.login(badEmailLoginForm));
 
 		System.out.println();
 		System.out.println("Going to test login exception - *WRONG* *Password*:");
-		LoginForm badPasswordLoginForm = new LoginForm("comp1Email@comp.com", "1010", ClientType.COMPANY);
+		LoginForm badPasswordLoginForm = new LoginForm("zootAllures@company.com", "zootAlluress", ClientType.COMPANY);
 		System.out.println(loginController.login(badPasswordLoginForm));
 
 		System.out.println();
 		System.out.println("Going to test GOOD company login:");
-		LoginForm goodLoginForm = new LoginForm("comp1Email@comp.com", "1111", ClientType.COMPANY);
+		LoginForm goodLoginForm = new LoginForm("zootAllures@company.com", "zootAllures", ClientType.COMPANY);
 		System.out.println(loginController.login(goodLoginForm));
 		String token = loginService.getTokenForClr();
 
@@ -82,41 +82,65 @@ public class CompanyClr implements CommandLineRunner {
 				" --------->>>>>>>> Going to add 5 coupons using companyController.addCompanyCoupon:");
 
 		Coupon coup1 = new Coupon();
-		coup1.setCategory(CouponCategory.FOOD);
-		coup1.setTitle("coup1Title");
-		coup1.setDescription("This is coupon description bla bla bla");
+		coup1.setCategory(CouponCategory.RESTAURANT);
+		coup1.setTitle("Carpaccio");
+		coup1.setDescription("An Italian hors d'oeuvre consisting of thin slices of raw beef or fish served with a sauce.");
 		coup1.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup1.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup1.setAmount(0);
 		coup1.setPrice(100);
 
+		File file1 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+		FileInputStream inputStream1 = new FileInputStream(file1);
+		MultipartFile multipartFile1 = new MockMultipartFile(file1.getName(), file1.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream1);
+		
 		Coupon coup2 = new Coupon();
-		coup2.setCategory(CouponCategory.FOOD);
-		coup2.setTitle("coup2Title");
-		coup2.setDescription("This is coupon description bla bla bla");
+		coup2.setCategory(CouponCategory.RESTAURANT);
+		coup2.setTitle("Roast Beef Sandwich");
+		coup2.setDescription("Roasted beef slices on the plancha, served with tehini, tomato salad, garlic and fresh chili.");
 		coup2.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup2.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup2.setAmount(200);
 		coup2.setPrice(200);
 
+		File file2 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\RoastBeefSandwich.jpg");
+		FileInputStream inputStream2 = new FileInputStream(file2);
+		MultipartFile multipartFile2 = new MockMultipartFile(file2.getName(), file2.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream2);
+		
 		Coupon coup3 = new Coupon();
 		coup3.setCategory(CouponCategory.RESTAURANT);
-		coup3.setTitle("coup3Title");
-		coup3.setDescription("This is coupon description bla bla bla");
+		coup3.setTitle("Fruit Allures Cocktail");
+		coup3.setDescription("Jack Daniels, Bacardi Oakhart, Passionflower Syrup, Strawberry Jam, Vanilla, Mango and Squeezed Lemon.");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup3.setAmount(888);
 		coup3.setPrice(300);
 
+		File file3 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\FruitAlluresCocktail.jpg");
+		FileInputStream inputStream3 = new FileInputStream(file3);
+		MultipartFile multipartFile3 = new MockMultipartFile(file3.getName(), file3.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream3);
+		
 		Coupon coup4 = new Coupon();
 		coup4.setCategory(CouponCategory.RESTAURANT);
-		coup4.setTitle("coup4Title");
-		coup4.setDescription("This is coupon description bla bla bla");
+		coup4.setTitle("Rosita Cocktail");
+		coup4.setDescription("White bacardi, chambord, pineapple juice, squeezed lemon and sugar water.");
 		coup4.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup4.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup4.setAmount(400);
 		coup4.setPrice(400);
 
+		File file4 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\RositaCocktail.jpg");
+		FileInputStream inputStream4 = new FileInputStream(file4);
+		MultipartFile multipartFile4 = new MockMultipartFile(file4.getName(), file4.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream4);
+		
 		Coupon coup5 = new Coupon();
 		coup5.setCategory(CouponCategory.RESTAURANT);
 		coup5.setTitle("coup5Title");
@@ -126,8 +150,14 @@ public class CompanyClr implements CommandLineRunner {
 		coup5.setAmount(500);
 		coup5.setPrice(500);
 
+		File file5 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+		FileInputStream inputStream5 = new FileInputStream(file5);
+		MultipartFile multipartFile5 = new MockMultipartFile(file5.getName(), file5.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream5);
+		
 		Coupon coup6 = new Coupon();
-		coup6.setCategory(CouponCategory.VACATION);
+		coup6.setCategory(CouponCategory.RESTAURANT);
 		coup6.setTitle("coup6Title");
 		coup6.setDescription("This is coupon description bla bla bla");
 		coup6.setStartDate(DateUtil.dateFormat(2029, 07, 28));
@@ -135,6 +165,12 @@ public class CompanyClr implements CommandLineRunner {
 		coup6.setAmount(600);
 		coup6.setPrice(600);
 
+		File file6 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+		FileInputStream inputStream6 = new FileInputStream(file6);
+		MultipartFile multipartFile6 = new MockMultipartFile(file6.getName(), file6.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream6);
+		
 		Coupon coup7 = new Coupon();
 		coup7.setCategory(CouponCategory.VACATION);
 		coup7.setTitle("coup7Title");
@@ -146,6 +182,12 @@ public class CompanyClr implements CommandLineRunner {
 		coup7.setAmount(700);
 		coup7.setPrice(700);
 
+		File file7 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+		FileInputStream inputStream7 = new FileInputStream(file7);
+		MultipartFile multipartFile7 = new MockMultipartFile(file7.getName(), file7.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream7);
+		
 		Coupon coup8 = new Coupon();
 		coup8.setCategory(CouponCategory.RESTAURANT);
 		coup8.setTitle("coup8Title");
@@ -155,20 +197,20 @@ public class CompanyClr implements CommandLineRunner {
 		coup8.setAmount(800);
 		coup8.setPrice(800);
 
-		File file = new File(
-				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Happy.jpg");
-		FileInputStream inputStream = new FileInputStream(file);
-		MultipartFile multipartFile = new MockMultipartFile(file.getName(), file.getName(),
-				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream);
+		File file8 = new File(
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+		FileInputStream inputStream8 = new FileInputStream(file8);
+		MultipartFile multipartFile8 = new MockMultipartFile(file8.getName(), file8.getName(),
+				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream8);
 
-		System.out.println(companyController.addCompanyCoupon(coup1, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup2, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup3, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup4, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup5, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup6, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup7, multipartFile, token));
-		System.out.println(companyController.addCompanyCoupon(coup8, multipartFile, token));
+		System.out.println(companyController.addCompanyCoupon(coup1, multipartFile1, token));
+		System.out.println(companyController.addCompanyCoupon(coup2, multipartFile2, token));
+		System.out.println(companyController.addCompanyCoupon(coup3, multipartFile3, token));
+		System.out.println(companyController.addCompanyCoupon(coup4, multipartFile4, token));
+		System.out.println(companyController.addCompanyCoupon(coup5, multipartFile5, token));
+		System.out.println(companyController.addCompanyCoupon(coup6, multipartFile6, token));
+		System.out.println(companyController.addCompanyCoupon(coup7, multipartFile7, token));
+		System.out.println(companyController.addCompanyCoupon(coup8, multipartFile8, token));
 
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test *BAD REQUEST* for companyController.addCompanyCoupon: (company title coup7Title, already exists)");
@@ -186,20 +228,18 @@ public class CompanyClr implements CommandLineRunner {
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.updateCoupon:");
 
-		coup3.setTitle("coup3Title");
-		coup3.setDescription("This is coupon description bla bla bla");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 29));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 29));
 		coup3.setAmount(333);
 		coup3.setPrice(300);
 
-		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile, token));
+		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
 
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test *BAD REQUEST* for companyController.updateCoupon: (update couponId not allowed)");
 
 		coup3.setId(1);
-		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile, token));
+		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.deleteCompanyCoupon:");
 
