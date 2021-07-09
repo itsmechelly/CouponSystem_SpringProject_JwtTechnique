@@ -84,9 +84,9 @@ public class AdminClr implements CommandLineRunner {
 		comp2.setPassword("KSPP");
 
 		Company comp3 = new Company();
-		comp3.setName("compName3");
-		comp3.setEmail("comp30Email@comp.com");
-		comp3.setPassword("30303030");
+		comp3.setName("Issta");
+		comp3.setEmail("Issta333@company.com");
+		comp3.setPassword("Issta333");
 
 		Company comp4 = new Company();
 		comp4.setName("compName4");
@@ -126,8 +126,8 @@ public class AdminClr implements CommandLineRunner {
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test adminController.updateCompany:");
 
-		comp3.setEmail("comp3Email@comp.com");
-		comp3.setPassword("3333");
+		comp3.setEmail("Issta@company.com");
+		comp3.setPassword("Issta");
 
 		System.out.println(adminController.updateCompany(comp3, token));
 
