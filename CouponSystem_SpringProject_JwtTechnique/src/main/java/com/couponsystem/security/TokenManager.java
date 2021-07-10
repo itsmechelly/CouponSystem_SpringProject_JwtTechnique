@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.couponsystem.exceptions.NotFoundException;
 import com.couponsystem.service.ClientService;
 
-@Component
+//@Component
 public class TokenManager {
 
 	private String token;

@@ -1,5 +1,6 @@
 package com.couponsystem.repo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import com.couponsystem.enums.CouponCategory;
 
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
+	int deleteAllByEndDateBefore(LocalDate endDate);
 	Coupon findById (int id);
 	Coupon findByCompanyIdAndTitle(int id, String title);
 	List<Coupon> findAll();

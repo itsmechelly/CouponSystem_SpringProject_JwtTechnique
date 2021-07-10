@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.couponsystem.exceptions.NotFoundException;
 
-@Component
+//@Component
 public class SessionContext {
 
 	@Autowired
