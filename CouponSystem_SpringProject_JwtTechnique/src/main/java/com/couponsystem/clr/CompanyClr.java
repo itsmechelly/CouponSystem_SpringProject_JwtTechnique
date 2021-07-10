@@ -85,9 +85,10 @@ public class CompanyClr implements CommandLineRunner {
 		coup1.setCategory(CouponCategory.RESTAURANT);
 		coup1.setTitle("Carpaccio");
 		coup1.setDescription("An Italian hors d'oeuvre consisting of thin slices of raw beef or fish served with a sauce.");
-		coup1.setStartDate(DateUtil.dateFormat(2029, 06, 28));
-		coup1.setEndDate(DateUtil.dateFormat(2029, 10, 28));
-		coup1.setAmount(0);
+		coup1.setStartDate(DateUtil.dateFormat(2022, 02, 02));
+		coup1.setEndDate(DateUtil.dateFormat(2022, 02, 02));
+//		coup1.setAmount(0);
+		coup1.setAmount(100);
 		coup1.setPrice(100);
 
 		File file1 = new File(
@@ -100,8 +101,8 @@ public class CompanyClr implements CommandLineRunner {
 		coup2.setCategory(CouponCategory.RESTAURANT);
 		coup2.setTitle("Roast Beef Sandwich");
 		coup2.setDescription("Roasted beef slices on the plancha, served with tehini, tomato salad, garlic and fresh chili.");
-		coup2.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-		coup2.setEndDate(DateUtil.dateFormat(2029, 10, 28));
+		coup2.setStartDate(DateUtil.dateFormat(2022, 02, 02));
+		coup2.setEndDate(DateUtil.dateFormat(2022, 02, 02));
 		coup2.setAmount(200);
 		coup2.setPrice(200);
 
@@ -115,8 +116,8 @@ public class CompanyClr implements CommandLineRunner {
 		coup3.setCategory(CouponCategory.RESTAURANT);
 		coup3.setTitle("Fruit Allures Cocktail");
 		coup3.setDescription("Jack Daniels, Bacardi Oakhart, Passionflower Syrup, Strawberry Jam, Vanilla and Squeezed Lemon.");
-		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 28));
-		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 28));
+		coup3.setStartDate(DateUtil.dateFormat(2022, 02, 02));
+		coup3.setEndDate(DateUtil.dateFormat(2022, 02, 02));
 		coup3.setAmount(888);
 		coup3.setPrice(300);
 
@@ -130,8 +131,8 @@ public class CompanyClr implements CommandLineRunner {
 		coup4.setCategory(CouponCategory.RESTAURANT);
 		coup4.setTitle("Rosita Cocktail");
 		coup4.setDescription("White bacardi, chambord, pineapple juice, squeezed lemon and sugar water.");
-		coup4.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-		coup4.setEndDate(DateUtil.dateFormat(2029, 10, 28));
+		coup4.setStartDate(DateUtil.dateFormat(2022, 02, 02));
+		coup4.setEndDate(DateUtil.dateFormat(2022, 02, 02));
 		coup4.setAmount(400);
 		coup4.setPrice(400);
 
@@ -144,37 +145,37 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup5 = new Coupon();
 		coup5.setCategory(CouponCategory.RESTAURANT);
 		coup5.setTitle("coup5Title");
-		coup5.setDescription("This is coupon description bla bla bla");
+		coup5.setDescription("This is coupon description bla bla bla...");
 		coup5.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup5.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup5.setAmount(500);
 		coup5.setPrice(500);
 
 		File file5 = new File(
-				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\SeaFishFillet.jpg");
 		FileInputStream inputStream5 = new FileInputStream(file5);
 		MultipartFile multipartFile5 = new MockMultipartFile(file5.getName(), file5.getName(),
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream5);
 		
 		Coupon coup6 = new Coupon();
 		coup6.setCategory(CouponCategory.RESTAURANT);
-		coup6.setTitle("coup6Title");
-		coup6.setDescription("This is coupon description bla bla bla");
+		coup6.setTitle("Steak Allures");
+		coup6.setDescription("Roasted sirloin slices on the plancha, tomato salad, garlic and fresh chili.");
 		coup6.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup6.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup6.setAmount(600);
 		coup6.setPrice(600);
 
 		File file6 = new File(
-				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\SteakAllures.jpg");
 		FileInputStream inputStream6 = new FileInputStream(file6);
 		MultipartFile multipartFile6 = new MockMultipartFile(file6.getName(), file6.getName(),
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream6);
 		
 		Coupon coup7 = new Coupon();
 		coup7.setCategory(CouponCategory.VACATION);
-		coup7.setTitle("coup7Title");
-		coup7.setDescription("This is coupon description bla bla bla");
+		coup7.setTitle("3 Colors Hummus");
+		coup7.setDescription("Beetroot hummus, curry hummus and house hummus, vegetables and pita slices.");
 //		coup7.setStartDate(DateUtil.dateFormat(2019, 07, 28));
 //		coup7.setEndDate(DateUtil.dateFormat(2019, 8, 28));
 		coup7.setStartDate(DateUtil.dateFormat(2029, 07, 28));
@@ -183,22 +184,22 @@ public class CompanyClr implements CommandLineRunner {
 		coup7.setPrice(700);
 
 		File file7 = new File(
-				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\3ColorsHummus.jpg");
 		FileInputStream inputStream7 = new FileInputStream(file7);
 		MultipartFile multipartFile7 = new MockMultipartFile(file7.getName(), file7.getName(),
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream7);
 		
 		Coupon coup8 = new Coupon();
 		coup8.setCategory(CouponCategory.RESTAURANT);
-		coup8.setTitle("coup8Title");
-		coup8.setDescription("This is coupon description bla bla bla");
+		coup8.setTitle("Sea Fish Fillet");
+		coup8.setDescription("Served with fried vegetables on the plancha.");
 		coup8.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup8.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup8.setAmount(800);
 		coup8.setPrice(800);
 
 		File file8 = new File(
-				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
+				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\SeaFishFillet.jpg");
 		FileInputStream inputStream8 = new FileInputStream(file8);
 		MultipartFile multipartFile8 = new MockMultipartFile(file8.getName(), file8.getName(),
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream8);
@@ -217,8 +218,8 @@ public class CompanyClr implements CommandLineRunner {
 
 		Coupon coup77 = new Coupon();
 		coup77.setCategory(CouponCategory.VACATION);
-		coup77.setTitle("coup7Title");
-		coup77.setDescription("This is coupon description bla bla bla");
+		coup77.setTitle("3 Colors Hummus");
+		coup77.setDescription("Beetroot hummus, curry hummus and house hummus, vegetables and pita slices.");
 		coup77.setStartDate(DateUtil.dateFormat(2029, 07, 28));
 		coup77.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup77.setAmount(7700);
