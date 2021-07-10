@@ -130,7 +130,7 @@ public class CompanyClr3 implements CommandLineRunner {
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream4);
 
 		Coupon coup5 = new Coupon();
-		coup5.setCategory(CouponCategory.ELECTRICITY);
+		coup5.setCategory(CouponCategory.VACATION);
 		coup5.setTitle("Dubai");
 		coup5.setDescription("This is coupon description bla bla bla");
 		coup5.setStartDate(DateUtil.dateFormat(2029, 07, 28));
@@ -145,7 +145,7 @@ public class CompanyClr3 implements CommandLineRunner {
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream5);
 
 		Coupon coup6 = new Coupon();
-		coup6.setCategory(CouponCategory.ELECTRICITY);
+		coup6.setCategory(CouponCategory.VACATION);
 		coup6.setTitle("United Arab Emirates");
 		coup6.setDescription("This is coupon description bla bla bla");
 		coup6.setStartDate(DateUtil.dateFormat(2029, 07, 28));
@@ -160,7 +160,7 @@ public class CompanyClr3 implements CommandLineRunner {
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream6);
 
 		Coupon coup7 = new Coupon();
-		coup7.setCategory(CouponCategory.ELECTRICITY);
+		coup7.setCategory(CouponCategory.VACATION);
 		coup7.setTitle("New York");
 		coup7.setDescription("This is coupon description bla bla bla");
 		coup7.setStartDate(DateUtil.dateFormat(2029, 07, 28));
@@ -175,7 +175,7 @@ public class CompanyClr3 implements CommandLineRunner {
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream7);
 
 		Coupon coup8 = new Coupon();
-		coup8.setCategory(CouponCategory.ELECTRICITY);
+		coup8.setCategory(CouponCategory.VACATION);
 		coup8.setTitle("Miami");
 		coup8.setDescription("This is coupon description bla bla bla");
 		coup8.setStartDate(DateUtil.dateFormat(2029, 07, 28));

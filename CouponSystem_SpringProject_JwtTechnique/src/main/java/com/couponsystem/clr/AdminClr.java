@@ -134,7 +134,7 @@ public class AdminClr implements CommandLineRunner {
 		ClrUtils.testSeparatedLine(
 				" --------->>>>>>>> Going to test adminController.updateCompany *BAD REQUEST*(cannot update companyName):");
 
-		comp3.setName("compName33");
+		comp3.setName("Issta");
 		System.out.println(adminController.updateCompany(comp3, token));
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test adminController.deleteCompany:");

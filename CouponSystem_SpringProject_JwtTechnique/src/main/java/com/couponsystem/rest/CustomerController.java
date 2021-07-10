@@ -54,6 +54,20 @@ public class CustomerController {
 		}
 	}
 
+	@GetMapping("/getOneCouponById/{couponId}")
+	public ResponseEntity<?> getOneCouponById(@PathVariable int couponId,
+			@RequestHeader(name = "CouponSystem_Header") String token) {
+
+		try {
+			jwtUtil.validateService(token, ClientType.CUSTOMER.toString());
+			return ResponseEntity.ok(customerService.getOneCouponById(couponId));
+		} catch (LogException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+		} catch (NotFoundException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	@GetMapping("/getAllCoupons")
 	public ResponseEntity<?> getAllCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 

@@ -73,7 +73,7 @@ public class CompanyClr2 implements CommandLineRunner {
 		coup1.setCategory(CouponCategory.ELECTRICITY);
 		coup1.setTitle("iPhone 12 Pro");
 		coup1.setDescription(
-				"Apple iPhone 12 Pro Max 128GB, blue color, official importer warranty, no charger and no headphones.");
+				"Apple iPhone 12 Pro Max 128GB, blue color, official importer warranty, no charger.");
 		coup1.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup1.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup1.setAmount(100);

@@ -74,6 +74,14 @@ public class CustomerService extends ClientService{
 		return coupFromDb;
 	}
 	
+	public Coupon getOneCouponById(int couponId) throws NotFoundException, LogException {
+
+		if (!customerImpl.couponExistsById(couponId))
+			throw new NotFoundException("coupon details.");
+
+		return customerImpl.findCouponById(couponId);
+	}
+	
 	public List<Coupon> getAllCoupons() throws NotFoundException, LogException {
 		
 		List<Coupon> couponsFromDb = customerImpl.getAllCoupons();

@@ -61,6 +61,10 @@ public class CustomerImpl {
 		return couponRepository.getCouponsByCustomersIdAndPriceLessThan(id, price);
 	}
 
+	public boolean couponExistsById(int id) {
+		return couponRepository.existsById(id);
+	}
+	
 	public boolean couponExistsByCustomersIdAndTitle(int id, String title) {
 		return couponRepository.existsByCustomersIdAndTitle(id, title);
 	}

@@ -114,7 +114,7 @@ public class CompanyClr implements CommandLineRunner {
 		Coupon coup3 = new Coupon();
 		coup3.setCategory(CouponCategory.RESTAURANT);
 		coup3.setTitle("Fruit Allures Cocktail");
-		coup3.setDescription("Jack Daniels, Bacardi Oakhart, Passionflower Syrup, Strawberry Jam, Vanilla, Mango and Squeezed Lemon.");
+		coup3.setDescription("Jack Daniels, Bacardi Oakhart, Passionflower Syrup, Strawberry Jam, Vanilla and Squeezed Lemon.");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup3.setAmount(888);
