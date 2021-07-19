@@ -67,6 +67,7 @@ public class AdminClr implements CommandLineRunner {
 		
 		
 //		TODO -> Logout
+//		do I really have to add logout support in the back? I had it already in the front.
 //		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Admin Logout:");
 
 //		------------------------------------------------------------------------------------------------------------
