@@ -197,7 +197,7 @@ public class CompanyClr3 implements CommandLineRunner {
 		System.out.println(companyController.addCompanyCoupon(coup6, multipartFile6, token));
 		System.out.println(companyController.addCompanyCoupon(coup7, multipartFile7, token));
 		System.out.println(companyController.addCompanyCoupon(coup8, multipartFile8, token));
-//
+
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.getCompanyDetails:");
 
 		System.out.println(companyController.getCompanyDetails(token));
