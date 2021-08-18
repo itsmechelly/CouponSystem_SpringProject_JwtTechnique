@@ -75,8 +75,7 @@ public class JwtUtil {
 		return extractExpiration(token).before(new Date());
 	}
 
-	public String generateToken(String clientType, int clientId, String clientName,
-			String clientEmail) {
+	public String generateToken(String clientType, int clientId, String clientName, String clientEmail) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("clientType", clientType.toUpperCase());
 		claims.put("clientId", clientId);

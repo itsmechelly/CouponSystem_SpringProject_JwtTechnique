@@ -202,5 +202,4 @@ public class CompanyClr3 implements CommandLineRunner {
 
 		System.out.println(companyController.getCompanyDetails(token));
 	}
-
 }

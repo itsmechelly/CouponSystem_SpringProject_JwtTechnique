@@ -65,11 +65,6 @@ public class AdminClr implements CommandLineRunner {
 		System.out.println(loginController.login(goodLoginForm));
 		String token = loginService.getTokenForClr();
 		
-		
-//		TODO -> Logout
-//		do I really have to add logout support in the back? I had it already in the front.
-//		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Admin Logout:");
-
 //		------------------------------------------------------------------------------------------------------------
 		
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test adminController.addCompany:");
@@ -234,5 +229,4 @@ public class AdminClr implements CommandLineRunner {
 
 		System.out.println(adminController.getAllCustomers(token));
 	}
-
 }

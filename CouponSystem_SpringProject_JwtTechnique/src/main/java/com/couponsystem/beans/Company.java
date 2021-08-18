@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,10 +33,6 @@ public class Company {
 	private String email;
 	@Column(nullable = true)
 	private String password;
-	//TODO
-//	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//	@OneToMany(mappedBy = "company", fetch = FetchType.LAZY , cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE})
 	private List<Coupon> coupons = new ArrayList<>();
-	
 }

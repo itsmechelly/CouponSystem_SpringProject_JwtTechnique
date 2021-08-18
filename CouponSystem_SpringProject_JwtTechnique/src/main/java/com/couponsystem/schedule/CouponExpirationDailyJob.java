@@ -50,5 +50,4 @@ public class CouponExpirationDailyJob {
 	private DateTimeFormatter getFormat() {
 		return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss.SSS");
 	}
-
 }

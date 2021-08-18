@@ -23,5 +23,4 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 	boolean existsByTitleAndIdNot(String title, int id);
 	boolean existsByCompanyIdAndTitle(int id, String title);
 	boolean existsByCustomersIdAndTitle(int id, String title);
-	
 }

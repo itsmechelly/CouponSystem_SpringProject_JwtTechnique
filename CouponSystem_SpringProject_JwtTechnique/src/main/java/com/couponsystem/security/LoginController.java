@@ -19,14 +19,14 @@ import com.couponsystem.service.LoginService;
 public class LoginController {
 
 	private final LoginService loginService;
-	
+
 	public LoginController(LoginService loginService) {
 		super();
 		this.loginService = loginService;
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginForm loginForm) throws NotFoundException {		
+	public ResponseEntity<?> login(@RequestBody LoginForm loginForm) throws NotFoundException {
 
 		HttpHeaders responseHeaders = new HttpHeaders();
 
@@ -40,5 +40,4 @@ public class LoginController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
 		}
 	}
-
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.couponsystem.repo.CouponRepository;
 
-
 @Service
 @Transactional
 public class CouponExpirationDailyJobService {

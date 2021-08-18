@@ -73,9 +73,6 @@ public class CompanyClr implements CommandLineRunner {
 		System.out.println(loginController.login(goodLoginForm));
 		String token = loginService.getTokenForClr();
 
-//		TODO -> Logout
-//		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Company Logout:");
-//		do I really have to add logout support in the back? I had it already in the front.
 //		------------------------------------------------------------------------------------------------------------
 
 		ClrUtils.testSeparatedLine(
@@ -277,5 +274,4 @@ public class CompanyClr implements CommandLineRunner {
 
 		System.out.println(companyController.getCompanyDetails(token));
 	}
-
 }

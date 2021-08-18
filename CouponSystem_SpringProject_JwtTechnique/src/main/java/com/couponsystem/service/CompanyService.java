@@ -81,7 +81,7 @@ public class CompanyService extends ClientService {
 			throw new NotAllowedException("company id number", this.companyId);
 		if (companyImpl.couponExistsByTitleAndIdNot(coupon.getTitle(), coupon.getId()))
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
-		
+
 		if (imageFile != null) {
 			this.storageService.deleteFile(coupon.getImage());
 			String imagePath = this.storageService.storeFile(imageFile);
@@ -140,5 +140,4 @@ public class CompanyService extends ClientService {
 
 		return companyImpl.findCompanyById(this.companyId);
 	}
-
 }

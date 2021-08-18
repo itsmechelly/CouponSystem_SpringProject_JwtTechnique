@@ -59,5 +59,4 @@ public class FileStorageService {
 			throw new RuntimeException("Deleting file " + imageName + " failed", e);
 		}
 	}
-
 }

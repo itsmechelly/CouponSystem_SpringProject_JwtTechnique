@@ -67,7 +67,7 @@ public class CustomerController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/getAllCoupons")
 	public ResponseEntity<?> getAllCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 
@@ -81,7 +81,7 @@ public class CustomerController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping("/getAllCustomerCoupons")
 	public ResponseEntity<?> getAllCustomerCoupons(@RequestHeader(name = "CouponSystem_Header") String token) {
 
@@ -139,5 +139,4 @@ public class CustomerController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-
 }

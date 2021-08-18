@@ -72,8 +72,7 @@ public class CompanyClr2 implements CommandLineRunner {
 		Coupon coup1 = new Coupon();
 		coup1.setCategory(CouponCategory.ELECTRICITY);
 		coup1.setTitle("iPhone 12 Pro");
-		coup1.setDescription(
-				"Apple iPhone 12 Pro Max 128GB, blue color, official importer warranty, no charger.");
+		coup1.setDescription("Apple iPhone 12 Pro Max 128GB, blue color, official importer warranty, no charger.");
 		coup1.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup1.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup1.setAmount(100);
@@ -103,7 +102,8 @@ public class CompanyClr2 implements CommandLineRunner {
 		Coupon coup3 = new Coupon();
 		coup3.setCategory(CouponCategory.ELECTRICITY);
 		coup3.setTitle("Asus Computer");
-		coup3.setDescription("Pre-made desktop brand computer from Asus, AMD Ryzen processor holder 39 9 3900X 3.8GHz - 4.6GHz, 64GB memory, 1TB SSD drive.");
+		coup3.setDescription(
+				"Pre-made desktop brand computer from Asus, AMD Ryzen processor holder 39 9 3900X 3.8GHz - 4.6GHz, 64GB memory, 1TB SSD drive.");
 		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 28));
 		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 28));
 		coup3.setAmount(300);
@@ -129,79 +129,14 @@ public class CompanyClr2 implements CommandLineRunner {
 		FileInputStream inputStream4 = new FileInputStream(file4);
 		MultipartFile multipartFile4 = new MockMultipartFile(file4.getName(), file4.getName(),
 				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream4);
-//
-//		Coupon coup5 = new Coupon();
-//		coup5.setCategory(CouponCategory.ELECTRICITY);
-//		coup5.setTitle("coup5Title");
-//		coup5.setDescription("This is coupon description bla bla bla");
-//		coup5.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-//		coup5.setEndDate(DateUtil.dateFormat(2029, 10, 28));
-//		coup5.setAmount(500);
-//		coup5.setPrice(500);
-//
-//		File file5 = new File(
-//				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
-//		FileInputStream inputStream5 = new FileInputStream(file5);
-//		MultipartFile multipartFile5 = new MockMultipartFile(file5.getName(), file5.getName(),
-//				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream5);
-//
-//		Coupon coup6 = new Coupon();
-//		coup6.setCategory(CouponCategory.ELECTRICITY);
-//		coup6.setTitle("coup6Title");
-//		coup6.setDescription("This is coupon description bla bla bla");
-//		coup6.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-//		coup6.setEndDate(DateUtil.dateFormat(2029, 10, 28));
-//		coup6.setAmount(600);
-//		coup6.setPrice(600);
-//
-//		File file6 = new File(
-//				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
-//		FileInputStream inputStream6 = new FileInputStream(file6);
-//		MultipartFile multipartFile6 = new MockMultipartFile(file6.getName(), file6.getName(),
-//				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream6);
-//
-//		Coupon coup7 = new Coupon();
-//		coup7.setCategory(CouponCategory.ELECTRICITY);
-//		coup7.setTitle("coup7Title");
-//		coup7.setDescription("This is coupon description bla bla bla");
-//		coup7.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-//		coup7.setEndDate(DateUtil.dateFormat(2029, 8, 28));
-//		coup7.setAmount(700);
-//		coup7.setPrice(700);
-//
-//		File file7 = new File(
-//				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
-//		FileInputStream inputStream7 = new FileInputStream(file7);
-//		MultipartFile multipartFile7 = new MockMultipartFile(file7.getName(), file7.getName(),
-//				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream7);
-//
-//		Coupon coup8 = new Coupon();
-//		coup8.setCategory(CouponCategory.ELECTRICITY);
-//		coup8.setTitle("coup8Title");
-//		coup8.setDescription("This is coupon description bla bla bla");
-//		coup8.setStartDate(DateUtil.dateFormat(2029, 07, 28));
-//		coup8.setEndDate(DateUtil.dateFormat(2029, 10, 28));
-//		coup8.setAmount(800);
-//		coup8.setPrice(800);
-//
-//		File file8 = new File(
-//				"C:\\Users\\hllyl\\git\\CouponSystem_SpringProject_JwtTechnique\\CouponSystem_SpringProject_JwtTechnique\\src\\main\\resources\\static\\pics\\Companies\\ZootAllures\\Carpaccio.jpg");
-//		FileInputStream inputStream8 = new FileInputStream(file8);
-//		MultipartFile multipartFile8 = new MockMultipartFile(file8.getName(), file8.getName(),
-//				ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream8);
 
 		System.out.println(companyController.addCompanyCoupon(coup1, multipartFile1, token));
 		System.out.println(companyController.addCompanyCoupon(coup2, multipartFile2, token));
 		System.out.println(companyController.addCompanyCoupon(coup3, multipartFile3, token));
 		System.out.println(companyController.addCompanyCoupon(coup4, multipartFile4, token));
-//		System.out.println(companyController.addCompanyCoupon(coup5, multipartFile5, token));
-//		System.out.println(companyController.addCompanyCoupon(coup6, multipartFile6, token));
-//		System.out.println(companyController.addCompanyCoupon(coup7, multipartFile7, token));
-//		System.out.println(companyController.addCompanyCoupon(coup8, multipartFile8, token));
 
 		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.getCompanyDetails:");
 
 		System.out.println(companyController.getCompanyDetails(token));
 	}
-
 }

@@ -17,13 +17,13 @@ import com.couponsystem.utils.ClrUtils;
 @Order(6)
 public class CustomerClr implements CommandLineRunner {
 
-	
 	private final CustomerController customerController;
 	private LoginService loginService;
 	private final LoginController loginController;
 
 	@Autowired
-	public CustomerClr(LoginController loginController, LoginService loginService, CustomerController customerController) {
+	public CustomerClr(LoginController loginController, LoginService loginService,
+			CustomerController customerController) {
 		super();
 		this.loginController = loginController;
 		this.loginService = loginService;
@@ -58,16 +58,11 @@ public class CustomerClr implements CommandLineRunner {
 		LoginForm badPasswordLoginForm = new LoginForm("cust1@cust.com", "1010", ClientType.CUSTOMER);
 		System.out.println(loginController.login(badPasswordLoginForm));
 
-
 		System.out.println();
 		System.out.println("Going to test GOOD customer login:");
 		LoginForm goodLoginForm = new LoginForm("cust1@cust.com", "1111", ClientType.CUSTOMER);
 		System.out.println(loginController.login(goodLoginForm));
 		String token = loginService.getTokenForClr();
-
-//		TODO -> Logout
-//		do I really have to add logout support in the back? I had it already in the front.
-//		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test Customer Logout:");
 
 //		------------------------------------------------------------------------------------------------------------
 
@@ -118,5 +113,4 @@ public class CustomerClr implements CommandLineRunner {
 
 		System.out.println(customerController.getCustomerDetails(token));
 	}
-
 }
