@@ -16,7 +16,7 @@ import com.couponsystem.security.JwtUtil;
 public class LoginService {
 
 	public ApplicationContext ctx;
-	//TODO - the token variable below is only for CLR testing, not for production!
+	//TODO - the token variable below is only for CLR testing, not for production!r
 	public String tokenForClr;
 	private JwtUtil jwtUtil;
 	private AdminService adminService;
