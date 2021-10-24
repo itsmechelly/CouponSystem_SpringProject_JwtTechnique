@@ -13,8 +13,8 @@ import com.couponsystem.security.LoginController;
 import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 
-@Component
-@Order(6)
+//@Component
+//@Order(6)
 public class CustomerClr implements CommandLineRunner {
 
 	private final CustomerController customerController;

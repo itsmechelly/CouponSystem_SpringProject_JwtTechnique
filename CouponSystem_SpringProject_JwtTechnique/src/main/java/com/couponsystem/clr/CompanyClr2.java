@@ -21,8 +21,8 @@ import com.couponsystem.service.LoginService;
 import com.couponsystem.utils.ClrUtils;
 import com.couponsystem.utils.DateUtil;
 
-@Component
-@Order(3)
+//@Component
+//@Order(3)
 public class CompanyClr2 implements CommandLineRunner {
 
 	private final LoginController loginController;
