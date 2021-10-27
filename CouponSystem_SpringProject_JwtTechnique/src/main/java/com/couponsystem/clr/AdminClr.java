@@ -14,8 +14,8 @@
 //import com.couponsystem.service.LoginService;
 //import com.couponsystem.utils.ClrUtils;
 //
-////@Component
-////@Order(1)
+//@Component
+//@Order(1)
 //public class AdminClr implements CommandLineRunner {
 //
 //	private LoginController loginController;

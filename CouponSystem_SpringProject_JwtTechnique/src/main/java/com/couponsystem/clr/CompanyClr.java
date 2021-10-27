@@ -21,8 +21,8 @@
 //import com.couponsystem.utils.ClrUtils;
 //import com.couponsystem.utils.DateUtil;
 //
-////@Component
-////@Order(2)
+//@Component
+//@Order(2)
 //public class CompanyClr implements CommandLineRunner {
 //
 //	private final LoginController loginController;
@@ -224,20 +224,20 @@
 //
 //		System.out.println(companyController.addCompanyCoupon(coup77, null, token));
 //
-//		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.updateCoupon:");
+////		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.updateCoupon:");
+////
+////		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 29));
+////		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 29));
+////		coup3.setAmount(333);
+////		coup3.setPrice(300);
+////
+////		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
 //
-//		coup3.setStartDate(DateUtil.dateFormat(2029, 06, 29));
-//		coup3.setEndDate(DateUtil.dateFormat(2029, 10, 29));
-//		coup3.setAmount(333);
-//		coup3.setPrice(300);
-//
-//		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
-//
-//		ClrUtils.testSeparatedLine(
-//				" --------->>>>>>>> Going to test *BAD REQUEST* for companyController.updateCoupon: (update couponId not allowed)");
-//
-//		coup3.setId(1);
-//		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
+////		ClrUtils.testSeparatedLine(
+////				" --------->>>>>>>> Going to test *BAD REQUEST* for companyController.updateCoupon: (update couponId not allowed)");
+////
+////		coup3.setId(1);
+////		System.out.println(companyController.updateCompanyCoupon(coup3, multipartFile3, token));
 //
 //		ClrUtils.testSeparatedLine(" --------->>>>>>>> Going to test companyController.deleteCompanyCoupon:");
 //

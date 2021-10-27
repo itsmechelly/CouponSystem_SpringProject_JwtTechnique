@@ -3,8 +3,18 @@ package com.couponsystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.couponsystem.beans.Company;
@@ -26,7 +36,9 @@ public class CompanyService extends ClientService {
 	public int companyId;
 	private CompanyImpl companyImpl;
 	private FileStorageService storageService;
-
+	@Value(value = "${img.api.key}")
+	private String imgbbApiKey;
+	
 	public CompanyService(CompanyImpl companyImpl, FileStorageService storageService) {
 		super();
 		this.companyImpl = companyImpl;
@@ -55,18 +67,68 @@ public class CompanyService extends ClientService {
 
 //	------------------------------------------------------------------------------------------------------------
 
+//	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
+//
+//		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
+//			throw new AlreadyExistException("Company title ", coupon.getTitle());
+//
+//		String imagePath = this.storageService.storeFile(imageFile);
+//		coupon.setImage(imagePath);
+//
+//		coupon.setCompanyId(this.companyId);
+//		companyImpl.addCoupon(coupon);
+//		return coupon;
+//	}
+	
+	
+	
+	
+	
+	
+	
 	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
 
+		String imageUrl = uploadImageToImgbb(imageFile);
+		coupon.setImage(imageUrl);
+		
 		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
 
-		String imagePath = this.storageService.storeFile(imageFile);
-		coupon.setImage(imagePath);
+//		String imagePath = this.storageService.storeFile(imageFile);
+//		coupon.setImage(imagePath);
 
 		coupon.setCompanyId(this.companyId);
 		companyImpl.addCoupon(coupon);
 		return coupon;
 	}
+	
+	
+	
+	private String uploadImageToImgbb(MultipartFile image) {
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("image", image.getResource());
+			HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+			String serverUrl = "https://api.imgbb.com/1/upload?key=" + imgbbApiKey;
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<String> response = restTemplate.postForEntity(serverUrl, requestEntity, String.class);
+			String json = response.getBody();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
+			JSONObject data = (JSONObject) jsonObject.get("data");
+			return (String) data.get("url");
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+			return null;
+		}
+	}
+
+	
+	
+	
+	
 
 	public Coupon updateCoupon(Coupon coupon, MultipartFile imageFile)
 			throws LogException, NotFoundException, NotAllowedException, AlreadyExistException {
@@ -83,9 +145,12 @@ public class CompanyService extends ClientService {
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
 
 		if (imageFile != null) {
+			
 			this.storageService.deleteFile(coupon.getImage());
-			String imagePath = this.storageService.storeFile(imageFile);
-			coupon.setImage(imagePath);
+			String imageUrl = uploadImageToImgbb(imageFile);
+			coupon.setImage(imageUrl);
+//			String imagePath = this.storageService.storeFile(imageFile);
+//			coupon.setImage(imagePath);
 		}
 
 		companyImpl.updateCoupon(coupon);
