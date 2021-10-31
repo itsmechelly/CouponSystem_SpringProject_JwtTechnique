@@ -38,7 +38,7 @@ public class CompanyService extends ClientService {
 	private FileStorageService storageService;
 	@Value(value = "${img.api.key}")
 	private String imgbbApiKey;
-	
+
 	public CompanyService(CompanyImpl companyImpl, FileStorageService storageService) {
 		super();
 		this.companyImpl = companyImpl;
@@ -79,20 +79,14 @@ public class CompanyService extends ClientService {
 //		companyImpl.addCoupon(coupon);
 //		return coupon;
 //	}
-	
-	
-	
-	
-	
-	
-	
+
 	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
+
+		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
+			throw new AlreadyExistException("Company title ", coupon.getTitle());
 
 		String imageUrl = uploadImageToImgbb(imageFile);
 		coupon.setImage(imageUrl);
-		
-		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
-			throw new AlreadyExistException("Company title ", coupon.getTitle());
 
 //		String imagePath = this.storageService.storeFile(imageFile);
 //		coupon.setImage(imagePath);
@@ -101,34 +95,34 @@ public class CompanyService extends ClientService {
 		companyImpl.addCoupon(coupon);
 		return coupon;
 	}
-	
-	
-	
+
 	private String uploadImageToImgbb(MultipartFile image) {
+		
 		try {
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			
 			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 			body.add("image", image.getResource());
+			
 			HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 			String serverUrl = "https://api.imgbb.com/1/upload?key=" + imgbbApiKey;
 			RestTemplate restTemplate = new RestTemplate();
+			
 			ResponseEntity<String> response = restTemplate.postForEntity(serverUrl, requestEntity, String.class);
 			String json = response.getBody();
 			JSONParser jsonParser = new JSONParser();
+			
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
 			JSONObject data = (JSONObject) jsonObject.get("data");
 			return (String) data.get("url");
+			
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 			return null;
 		}
 	}
-
-	
-	
-	
-	
 
 	public Coupon updateCoupon(Coupon coupon, MultipartFile imageFile)
 			throws LogException, NotFoundException, NotAllowedException, AlreadyExistException {
@@ -145,7 +139,7 @@ public class CompanyService extends ClientService {
 			throw new AlreadyExistException("Company title ", coupon.getTitle());
 
 		if (imageFile != null) {
-			
+
 			this.storageService.deleteFile(coupon.getImage());
 			String imageUrl = uploadImageToImgbb(imageFile);
 			coupon.setImage(imageUrl);

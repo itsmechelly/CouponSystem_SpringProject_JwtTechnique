@@ -15,23 +15,22 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileStorageService {
 
-	@Value("${file.upload-dir}")
-	private String storageDir;
+//	@Value("${file.upload-dir}")
+//	private String storageDir;
 	private Path fileStoragePath;
 
-	@PostConstruct
-	public void init() {
-		this.fileStoragePath = Paths.get(this.storageDir).toAbsolutePath();
-		System.out.println(this.fileStoragePath);
-
-		try {
-			// create the directory/folder pics if not created
-			Files.createDirectories(fileStoragePath);
-		} catch (IOException e) {
-			throw new RuntimeException("could not create directory", e);
-		}
-
-	}
+//	@PostConstruct
+//	public void init() {
+//		this.fileStoragePath = Paths.get(this.storageDir).toAbsolutePath();
+//		System.out.println(this.fileStoragePath);
+//
+//		try {
+//			// create the directory/folder pics if not created
+//			Files.createDirectories(fileStoragePath);
+//		} catch (IOException e) {
+//			throw new RuntimeException("could not create directory", e);
+//		}
+//	}
 
 //	saves the file
 	public String storeFile(MultipartFile file) {
