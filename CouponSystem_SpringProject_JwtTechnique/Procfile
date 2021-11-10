@@ -1,0 +1,2 @@
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar "target/best-coupon-system-ever-client.jar"  -Dspring.profiles
+.active=test
