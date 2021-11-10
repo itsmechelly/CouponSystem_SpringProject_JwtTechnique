@@ -1,2 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar "target/https://best-coupon-system-ever-client.herokuapp.com"  -Dspring.profiles
-.active=test
+web: java $JAVA_OPTS -jar target/*.jar -Dserver.port=$PORT $JAR_OPTS
