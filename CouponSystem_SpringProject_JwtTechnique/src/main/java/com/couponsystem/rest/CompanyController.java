@@ -28,7 +28,8 @@ import com.couponsystem.security.JwtUtil;
 
 @RestController
 @RequestMapping("/company")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+@CrossOrigin
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CompanyController {
 
