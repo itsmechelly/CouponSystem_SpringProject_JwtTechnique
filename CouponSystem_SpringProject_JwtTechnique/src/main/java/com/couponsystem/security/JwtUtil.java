@@ -61,6 +61,23 @@ public class JwtUtil {
 		return (String) claims.get("clientType");
 	}
 
+	public int extractUserTypeForFilter(String token) {
+		String user = extractAllClaims(token).get("userType").toString();
+		switch (user) {
+		case "ADMIN": {
+			return 0;
+		}
+		case "COMPANY": {
+			return 1;
+		}
+		case "CUSTOMER": {
+			return 2;
+		}
+		default:
+			return -1;
+		}
+	}
+	
 	public <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
 		final Claims claims = extractAllClaims(token);
 		return claimResolver.apply(claims);
