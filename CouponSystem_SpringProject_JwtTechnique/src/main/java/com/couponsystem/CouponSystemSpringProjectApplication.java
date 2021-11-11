@@ -24,19 +24,19 @@ public class CouponSystemSpringProjectApplication {
 		SpringApplication.run(CouponSystemSpringProjectApplication.class, args);
 	}
 	
-	@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://couponexpress.herokuapp.com"));
-        configuration.setAllowedOrigins(Arrays.asList("https://best-coupon-system-ever-client.herokuapp.com"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-                "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin",
-                "Cache-Control", "Content-Type"));
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//	@Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("https://couponexpress.herokuapp.com"));
+//        configuration.setAllowedOrigins(Arrays.asList("https://best-coupon-system-ever-client.herokuapp.com"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
+//        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
+//                "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin",
+//                "Cache-Control", "Content-Type"));
+//        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 	
 	@Bean
 	public FilterRegistrationBean<TokenFilter> tokenFilterRegistration(JwtUtil jwtUtil){
