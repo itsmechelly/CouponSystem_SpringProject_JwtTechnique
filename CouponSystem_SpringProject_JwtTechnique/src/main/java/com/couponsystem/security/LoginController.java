@@ -15,8 +15,9 @@ import com.couponsystem.exceptions.NotFoundException;
 import com.couponsystem.service.LoginService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "https://couponexpress.herokuapp.com", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class LoginController {
 
 	private final LoginService loginService;
