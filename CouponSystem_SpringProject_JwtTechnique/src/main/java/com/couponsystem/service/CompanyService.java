@@ -67,19 +67,6 @@ public class CompanyService extends ClientService {
 
 //	------------------------------------------------------------------------------------------------------------
 
-//	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
-//
-//		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
-//			throw new AlreadyExistException("Company title ", coupon.getTitle());
-//
-//		String imagePath = this.storageService.storeFile(imageFile);
-//		coupon.setImage(imagePath);
-//
-//		coupon.setCompanyId(this.companyId);
-//		companyImpl.addCoupon(coupon);
-//		return coupon;
-//	}
-
 	public Coupon addCoupon(Coupon coupon, MultipartFile imageFile) throws AlreadyExistException, LogException {
 
 		if (companyImpl.couponExistsByCompanyIdAndTitle(this.companyId, coupon.getTitle()))
@@ -88,40 +75,9 @@ public class CompanyService extends ClientService {
 		String imageUrl = uploadImageToImgbb(imageFile);
 		coupon.setImage(imageUrl);
 
-//		String imagePath = this.storageService.storeFile(imageFile);
-//		coupon.setImage(imagePath);
-
 		coupon.setCompanyId(this.companyId);
 		companyImpl.addCoupon(coupon);
 		return coupon;
-	}
-
-	private String uploadImageToImgbb(MultipartFile image) {
-		
-		try {
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-			
-			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-			body.add("image", image.getResource());
-			
-			HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-			String serverUrl = "https://api.imgbb.com/1/upload?key=" + imgbbApiKey;
-			RestTemplate restTemplate = new RestTemplate();
-			
-			ResponseEntity<String> response = restTemplate.postForEntity(serverUrl, requestEntity, String.class);
-			String json = response.getBody();
-			JSONParser jsonParser = new JSONParser();
-			
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
-			JSONObject data = (JSONObject) jsonObject.get("data");
-			return (String) data.get("url");
-			
-		} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
-			return null;
-		}
 	}
 
 	public Coupon updateCoupon(Coupon coupon, MultipartFile imageFile)
@@ -143,8 +99,6 @@ public class CompanyService extends ClientService {
 			this.storageService.deleteFile(coupon.getImage());
 			String imageUrl = uploadImageToImgbb(imageFile);
 			coupon.setImage(imageUrl);
-//			String imagePath = this.storageService.storeFile(imageFile);
-//			coupon.setImage(imagePath);
 		}
 
 		companyImpl.updateCoupon(coupon);
@@ -198,5 +152,32 @@ public class CompanyService extends ClientService {
 			throw new NotFoundException("company details.");
 
 		return companyImpl.findCompanyById(this.companyId);
+	}
+	
+	private String uploadImageToImgbb(MultipartFile image) {
+		
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("image", image.getResource());
+			
+			HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+			String serverUrl = "https://api.imgbb.com/1/upload?key=" + imgbbApiKey;
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ResponseEntity<String> response = restTemplate.postForEntity(serverUrl, requestEntity, String.class);
+			String json = response.getBody();
+			JSONParser jsonParser = new JSONParser();
+			
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
+			JSONObject data = (JSONObject) jsonObject.get("data");
+			return (String) data.get("url");
+			
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+			return null;
+		}
 	}
 }
