@@ -28,7 +28,8 @@ import com.couponsystem.security.JwtUtil;
 
 @RestController
 @RequestMapping("/company")
-@CrossOrigin(origins = "https://couponexpress.herokuapp.com", allowedHeaders = "*")
+@CrossOrigin
+//@CrossOrigin(origins = "https://couponexpress.herokuapp.com", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CompanyController {
