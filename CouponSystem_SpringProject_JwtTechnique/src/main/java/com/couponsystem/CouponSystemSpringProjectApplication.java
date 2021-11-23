@@ -11,7 +11,6 @@ import com.couponsystem.security.JwtUtil;
 
 @SpringBootApplication
 @EnableTransactionManagement
-//@ComponentScan(basePackages = {"com.couponsystem.rest", "com.couponsystem.security"})
 public class CouponSystemSpringProjectApplication {
 
 	public static void main(String[] args) {
