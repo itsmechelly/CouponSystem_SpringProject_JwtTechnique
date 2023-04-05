@@ -171,7 +171,7 @@ admin/addCompany
 👉 Note: to enter those routes you should first login, you can use those details:
 e-mail: zootAllures@company.com password: zootAllures
 
-```
+```http
 /company/addCompanyCoupon 
 ```
 ```http
