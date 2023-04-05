@@ -125,54 +125,96 @@ In addition to the Java exceptions, I created system-specific exceptions:<br/><b
 # Endpoints
 Please click the link below to browse the website:<br/>
 LINK WILL BE ADDED HERE SOON<br/>
-Note: to login, you can use those details:<br/>
+<br/><br/>
+👉 Note: to login, use those details:<br/>
+Admin: ➡️ e-mail: admin@admin.com password: admin<br/>
+Company: ➡️ e-mail: zootAllures@company.com password: zootAllures<br/>
+Customer: ➡️ e-mail: cust1@cust.com password: 1111<br/>
 
 ## Admin Controller:
+👉 Note: to enter those routes you should first login, you can use those details:
+e-mail: admin@admin.com password: admin
+
+```http
 admin/addCompany 
-<br/>
+```
+```http
+admin/addCompany 
+```
+```http
 /admin/updateCompany 
-<br/>
+```
+```http
 /admin/deleteCompany/{companyId} 
-<br/>
+```
+```http
 /admin/getOneCompanyById/{companyId} 
-<br/>
+```
+```http
 /admin/getAllCompanies 
-<br/>
+```
+```http
 /admin/addCustomer 
-<br/>
+```
+```http
 /admin/updateCustomer 
-<br/>
+```
+```http
 /admin/deleteCustomer/{customerId} 
-<br/>
+```
+```http
 /admin/getOneCustomerById/{customerId} 
-<br/>
+```
+```http
 /admin/getAllCustomers 
+```
 
 ## Company Controller:
+👉 Note: to enter those routes you should first login, you can use those details:
+e-mail: zootAllures@company.com password: zootAllures
+
+```
 /company/addCompanyCoupon 
-<br/>
+```
+```http
 /company/updateCompanyCoupon 
-<br/>
+```
+```http
 /company/deleteCompanyCoupon 
-<br/>
+```
+```http
 /company/getAllCompaniesCoupons 
-<br/>
+```
+```http
 /company/getAllCouponsByCategory/{couponCategory} 
-<br/>
+```
+```http
 /company/getAllCouponsUnderMaxPrice 
-<br/>
+```
+```http
 /company/getCompanyDetails 
+```
 
 ## Customer Controller:
+👉 Note: to enter those routes you should first login, you can use those details:
+e-mail: cust1@cust.com password: 1111
+
+
+```http
 /customer/purchaseCoupon 
-<br/>
+```
+```http
 /customer/getAllCustomerCoupons 
-<br/>
+```
+```http
 /customer/getAllCouponsByCategory/{couponCategory} 
-<br/>
+```
+```http
 /customer/getAllCouponsUnderMaxPrice 
-<br/>
+```
+```http
 /customer/getCustomerDetails 
+```
 
 # ⚒️ Tech Stack
 Language & Framework: Java Language, Spring Framework
