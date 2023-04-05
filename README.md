@@ -1,7 +1,5 @@
 # CouponSystem_SpringProject_JwtTechnique
 
-# CouponSystem_SpringProject_SessionTechnique
-
 This application is the final project I created during my software studies.<br/>
 The application is a Fullstack project, it is written in Java language on the server side and in React on the client side.
 
