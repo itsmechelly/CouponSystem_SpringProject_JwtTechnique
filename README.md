@@ -122,8 +122,8 @@ In addition to the Java exceptions, I created system-specific exceptions:<br/><b
 
 # Endpoints
 Please click the link below to browse the website:<br/>
-LINK WILL BE ADDED HERE SOON<br/>
-<br/><br/>
+[CLICK HERE TO SEE THE WEBSITE!](http://coupon-express.s3-website-us-east-1.amazonaws.com/layout)
+<br/><br/><br/>
 👉 Note: to login, use those details:<br/>
 Admin: ➡️ e-mail: admin@admin.com password: admin<br/>
 Company: ➡️ e-mail: zootAllures@company.com password: zootAllures<br/>
