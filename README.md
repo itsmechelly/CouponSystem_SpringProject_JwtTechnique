@@ -49,7 +49,7 @@ For the database I used:<br/>
 For the authentication & authorization I used the JTW technique.<br/><br/>
 
 👉 The current repo represent this 3rd project.<br/>
-https://github.com/itsmechelly/CouponSystem_SpringProject_JwtTechnique<br/><br/>
+https://github.com/itsmechelly/coupon-system-server<br/><br/>
 👉 NOTE: this project is the final version and deployed to AWS cloud, click to browse the website:<br/>
 LINK WILL BE ADDED SOON
 <br/><br/>
